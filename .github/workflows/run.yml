@@ -23,10 +23,10 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@master
 
-      - name: Checkout DustinWin/domain-list-custom
+      - name: Checkout greatcoolge/domain-list-custom
         uses: actions/checkout@v4
         with:
-          repository: DustinWin/domain-list-custom
+          repository: greatcoolge/domain-list-custom
           path: custom
 
       - name: Checkout v2fly/domain-list-community
@@ -35,17 +35,17 @@ jobs:
           repository: v2fly/domain-list-community
           path: community
 
-      - name: Checkout DustinWin/geoip
+      - name: Checkout greatcoolge/geoip
         uses: actions/checkout@v4
         with:
-          repository: DustinWin/geoip
+          repository: greatcoolge/geoip
           ref: clash
           path: geoip/clash
 
-      - name: Checkout DustinWin/geoip
+      - name: Checkout greatcoolge/geoip
         uses: actions/checkout@v4
         with:
-          repository: DustinWin/geoip
+          repository: greatcoolge/geoip
           ref: sing-box
           path: geoip/sing-box
 
