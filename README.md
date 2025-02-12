@@ -11,7 +11,7 @@
 ② `geosite,fakeip-filter,📌 fakeip 过滤` 源采用 [ShellCrash/public/fake_ip_filter.list](https://github.com/juewuy/ShellCrash/blob/dev/public/fake_ip_filter.list)（搭载 mihomo 内核或 [sing-box PuerNya 版内核](https://github.com/PuerNya/sing-box/tree/building)时，可使该规则集内的域名走 realip）  
 ③ `geosite,fakeip-filter-lite,📌 fakeip 过滤` 源采用 [ShellCrash/public/fake_ip_filter.list](https://github.com/juewuy/ShellCrash/blob/dev/public/fake_ip_filter.list)，仅保留主要域名（推荐搭配 [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome) 且 DNS 配置 mix 混合模式时使用）  
 ④ `geosite,private,🔒 私有网络` 源采用 [v2fly/domain-list-community/private](https://github.com/v2fly/domain-list-community/blob/master/data/private)、[blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（仅域名）和 [TrackersList](https://github.com/XIU2/TrackersListCollection/blob/master/all.txt)（仅域名）组合，并添加主流 [Dashboard 在线面板](https://github.com/DustinWin/proxy-tools/releases/tag/Dashboard)域名（`yacd.haishan.me`、`yacd.metacubex.one`、`d.metacubex.one`、`metacubex.github.io`、`metacubexd.pages.dev` 和 `board.zash.run.place`）  
-⑤ `geosite,ads,🛑 广告拦截` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
+⑤ `geosite,ads,🛑 广告域名` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
 ⑥ `geosite,microsoft-cn,🪟 微软服务` 源采用 [v2fly/domain-list-community/microsoft@cn](https://github.com/v2fly/domain-list-community/blob/master/data/microsoft)  
 ⑦ `geosite,apple-cn,🍎 苹果服务` 源采用 [v2fly/domain-list-community/apple@cn](https://github.com/v2fly/domain-list-community/blob/master/data/apple)  
 ⑧ `geosite,google-cn,🇬 谷歌服务` 源采用 [v2fly/domain-list-community/google@cn](https://github.com/v2fly/domain-list-community/blob/master/data/google)  
@@ -31,7 +31,7 @@
 ㉒ `geosite,tld-cn,🇨🇳 直连顶级域名` 源采用 [v2fly/domain-list-community/tld-cn](https://github.com/v2fly/domain-list-community/blob/master/data/tld-cn)  
 ㉓ `geosite,cn,🇨🇳 直连域名` 源采用 [v2fly/domain-list-community/cn](https://github.com/v2fly/domain-list-community/blob/master/data/cn)（删除了带有 `@!cn` 和 `@ads` 的域名，并新增了 v2fly/domain-list-community/geolocation-!cn 中带有 `@cn` 的域名）和 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（仅域名）组合  
 ㉔ `geoip,netflix,🎥 奈飞视频` 源采用 [GeoLite2-ASN-CSV/Netflix](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [blackmatrix7/ios_rule_script/Netflix](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)（Netflix_IP.txt）组合  
-㉕ `geoip,telegram,📲 电报信息` 源采用 [GeoLite2-ASN-CSV/Telegram](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)组合  
+㉕ `geoip,telegram,📲 电报消息` 源采用 [GeoLite2-ASN-CSV/Telegram](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)组合  
 ㉖ `geoip,private,🔒 私有网络` 源采用 [DustinWin/geoip/config.json](https://github.com/DustinWin/geoip/blob/master/config.json) 中的 `input.type:private` 和 [TrackersList](https://github.com/XIU2/TrackersListCollection/blob/master/all.txt)（仅 IP）组合  
 ㉗ `geoip,cn,🇨🇳 直连 IP` 源采用 [GeoLite2-Country-CSV/CN](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip)、[APNIC/CN](http://ftp.apnic.net/stats/apnic/delegated-apnic-latest) 和 [blackmatrix7/ios_rule_script/ChinaASN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Surge/ChinaASN) 组合
 ## 3. 文件下载
@@ -235,7 +235,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\ASN.mmdb -L https://
 ③ `rule-set,fakeip-filter-lite,📌 fakeip 过滤` 源采用 [ShellCrash/public/fake_ip_filter.list](https://github.com/juewuy/ShellCrash/blob/dev/public/fake_ip_filter.list)，仅保留主要域名（推荐搭配 [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome) 且 DNS 配置 mix 混合模式时使用）  
 ④ `rule-set,applications,🖥️ 直连软件` 源采用 [blackmatrix7/ios_rule_script/Download](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Download) 和 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/blob/release/applications.txt) 组合  
 ⑤ `rule-set,private,🔒 私有网络` 源采用 [v2fly/domain-list-community/private](https://github.com/v2fly/domain-list-community/blob/master/data/private)、[blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（仅域名）和 [TrackersList](https://github.com/XIU2/TrackersListCollection/blob/master/all.txt)（仅域名）组合，并添加主流 [Dashboard 在线面板](https://github.com/DustinWin/proxy-tools/releases/tag/Dashboard)域名（`yacd.haishan.me`、`yacd.metacubex.one`、`d.metacubex.one`、`metacubex.github.io`、`metacubexd.pages.dev`和 `board.zash.run.place`）  
-⑥ `rule-set,ads,🛑 广告拦截` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
+⑥ `rule-set,ads,🛑 广告域名` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
 ⑦ `rule-set,microsoft-cn,🪟 微软服务` 源采用 [v2fly/domain-list-community/microsoft@cn](https://github.com/v2fly/domain-list-community/blob/master/data/microsoft)  
 ⑧ `rule-set,apple-cn,🍎 苹果服务` 源采用 [v2fly/domain-list-community/apple@cn](https://github.com/v2fly/domain-list-community/blob/master/data/apple)  
 ⑨ `rule-set,google-cn,🇬 谷歌服务` 源采用 [v2fly/domain-list-community/google@cn](https://github.com/v2fly/domain-list-community/blob/master/data/google)  
@@ -255,7 +255,7 @@ curl -o %APPDATA%\io.github.clash-verge-rev.clash-verge-rev\ASN.mmdb -L https://
 ㉓ `rule-set,tld-cn,🇨🇳 直连顶级域名` 源采用 [v2fly/domain-list-community/tld-cn](https://github.com/v2fly/domain-list-community/blob/master/data/tld-cn)  
 ㉔ `rule-set,cn,🇨🇳 直连域名` 源采用 [v2fly/domain-list-community/cn](https://github.com/v2fly/domain-list-community/blob/master/data/cn)（删除了带有 `@!cn` 和 `@ads` 的域名，并新增了 v2fly/domain-list-community/geolocation-!cn 中带有 `@cn` 的域名）和 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（仅域名）组合  
 ㉕ `rule-set,netflixip,🎥 奈飞视频` 源采用 [GeoLite2-ASN-CSV/Netflix](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [blackmatrix7/ios_rule_script/Netflix](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)（Netflix_IP.txt）组合  
-㉖ `rule-set,telegramip,📲 电报信息` 源采用 [GeoLite2-ASN-CSV/Telegram](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)组合  
+㉖ `rule-set,telegramip,📲 电报消息` 源采用 [GeoLite2-ASN-CSV/Telegram](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) 和 [Telegram IP 段](https://core.telegram.org/resources/cidr.txt)组合  
 ㉗ `rule-set,privateip,🔒 私有网络` 源采用 [DustinWin/geoip/config.json](https://github.com/DustinWin/geoip/blob/master/config.json) 中的 `input.type:private` 和 [TrackersList](https://github.com/XIU2/TrackersListCollection/blob/master/all.txt)（仅 IP）组合  
 ㉘ `rule-set,cnip,🇨🇳 直连 IP` 源采用 [GeoLite2-Country-CSV/CN](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list)、[gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip)、[APNIC/CN](http://ftp.apnic.net/stats/apnic/delegated-apnic-latest) 和 [blackmatrix7/ios_rule_script/ChinaASN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Surge/ChinaASN) 组合
 ## 3. 文件使用
@@ -287,10 +287,12 @@ proxy-groups:
   - {name: 🇨🇳 直连 IP, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
   - {name: 🧱 代理顶级域名, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
   - {name: 🧱 代理域名, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
-  - {name: 📲 电报信息, type: select, proxies: [🚀 节点选择]}
+  - {name: 📲 电报消息, type: select, proxies: [🚀 节点选择]}
   - {name: 🖥️ 直连软件, type: select, proxies: [🎯 全球直连]}
   - {name: 🔒 私有网络, type: select, proxies: [🎯 全球直连]}
-  - {name: 🛑 广告拦截, type: select, proxies: [REJECT]}
+  - {name: 🛑 广告域名, type: select, proxies: [🔴 全球拦截, 🟢 全球绕过]}
+  - {name: 🔴 全球拦截, type: select, proxies: [REJECT]}
+  - {name: 🟢 全球绕过, type: select, proxies: [PASS]}
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT]}
 
 rule-providers:
@@ -514,7 +516,7 @@ rule-providers:
 rules:
   - RULE-SET,applications,🖥️ 直连软件
   - RULE-SET,private,🔒 私有网络
-  - RULE-SET,ads,🛑 广告拦截
+  - RULE-SET,ads,🛑 广告域名
   - RULE-SET,microsoft-cn,🪟 微软服务
   - RULE-SET,apple-cn,🍎 苹果服务
   - RULE-SET,google-cn,🇬 谷歌服务
@@ -534,7 +536,7 @@ rules:
   - RULE-SET,tld-cn,🇨🇳 直连顶级域名
   - RULE-SET,cn,🇨🇳 直连域名
   - RULE-SET,netflixip,🎥 奈飞视频,no-resolve
-  - RULE-SET,telegramip,📲 电报信息,no-resolve
+  - RULE-SET,telegramip,📲 电报消息,no-resolve
   - RULE-SET,privateip,🔒 私有网络,no-resolve
   - RULE-SET,cnip,🇨🇳 直连 IP
 ```
@@ -571,11 +573,12 @@ rules:
     { "tag": "🇨🇳 直连 IP", "type": "selector", "outbounds": [ "🎯 全球直连", "🚀 节点选择" ] },
     { "tag": "🧱 代理顶级域名", "type": "selector", "outbounds": [ "🚀 节点选择", "🎯 全球直连" ] },
     { "tag": "🧱 代理域名", "type": "selector", "outbounds": [ "🚀 节点选择", "🎯 全球直连" ] },
-    { "tag": "📲 电报信息", "type": "selector", "outbounds": ["🚀 节点选择"] },
+    { "tag": "📲 电报消息", "type": "selector", "outbounds": ["🚀 节点选择"] },
     { "tag": "🖥️ 直连软件", "type": "selector", "outbounds": ["🎯 全球直连"] },
     { "tag": "🔒 私有网络", "type": "selector", "outbounds": ["🎯 全球直连"] },
-    { "tag": "🛑 广告拦截", "type": "selector", "outbounds": ["REJECT"] },
-    { "tag": "🎯 全球直连", "type": "selector", "outbounds": ["DIRECT"] },
+    { "tag": "🛑 广告域名", "type": "selector", "outbounds": [ "🔴 全球拦截", "🎯 全球直连" ] },
+    { "tag": "🔴 全球拦截", "type": "selector", "outbounds": [ "REJECT" ] },
+    { "tag": "🎯 全球直连", "type": "selector", "outbounds": [ "DIRECT"] },
     { "tag": "REJECT", "type": "block" },
     { "tag": "DIRECT", "type": "direct" },
     { "tag": "GLOBAL", "type": "selector", "outbounds": [ "DIRECT", "REJECT", "🇭🇰 香港节点", "🇹🇼 台湾节点", "🇯🇵 日本节点", "🇰🇷 韩国节点", "🇸🇬 新加坡节点", "🇺🇸 美国节点" ] },
@@ -584,7 +587,7 @@ rules:
     "rules": [
       { "rule_set": [ "applications" ], "outbound": "🖥️ 直连软件" },
       { "rule_set": [ "private" ], "outbound": "🔒 私有网络" },
-      { "rule_set": [ "ads" ], "outbound": "🛑 广告拦截" },
+      { "rule_set": [ "ads" ], "outbound": "🛑 广告域名" },
       { "rule_set": [ "microsoft-cn" ], "outbound": "🪟 微软服务" },
       { "rule_set": [ "apple-cn" ], "outbound": "🍎 苹果服务" },
       { "rule_set": [ "google-cn" ], "outbound": "🇬 谷歌服务" },
@@ -603,7 +606,7 @@ rules:
       { "rule_set": [ "proxy" ], "outbound": "🧱 代理域名" },
       { "rule_set": [ "tld-cn" ], "outbound": "🇨🇳 直连顶级域名" },
       { "rule_set": [ "cn" ], "outbound": "🇨🇳 直连域名" },
-      { "rule_set": [ "telegramip" ], "outbound": "📲 电报信息", "skip_resolve": true },
+      { "rule_set": [ "telegramip" ], "outbound": "📲 电报消息", "skip_resolve": true },
       { "rule_set": [ "privateip" ], "outbound": "🔒 私有网络", "skip_resolve": true },
       { "rule_set": [ "cnip" ], "outbound": "🇨🇳 直连 IP" }
     ],
