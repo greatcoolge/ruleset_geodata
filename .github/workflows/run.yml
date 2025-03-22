@@ -48,7 +48,7 @@ jobs:
       - name: Generate `mihomo` geodata
         run: |
           mkdir -p ./community/mydata/
-          archs1=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai networktest netflix disney max primevideo appletv youtube tiktok bilibili tld-proxy proxy tld-cn cn)
+          archs1=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai networktest netflix disney max primevideo appletv youtube tiktok bilibili spotify tld-proxy proxy tld-cn cn)
           archs2=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai networktest tld-proxy proxy tld-cn cn)
 
           # Generate `mihomo` geosite-all.dat
@@ -133,7 +133,7 @@ jobs:
       - name: Generate `mihomo` rule-set
         run: |
           mkdir -p ./mihomo-ruleset/
-          domains=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai netflix disney max primevideo appletv youtube tiktok bilibili tld-proxy proxy tld-cn cn)
+          domains=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai netflix disney max primevideo appletv youtube tiktok bilibili spotify tld-proxy proxy tld-cn cn)
           archs=(applications networktest)
           ips=(privateip cnip netflixip telegramip)
 
