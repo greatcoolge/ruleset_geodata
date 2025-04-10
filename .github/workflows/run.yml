@@ -48,7 +48,7 @@ jobs:
       - name: Generate `mihomo` geodata
         run: |
           mkdir -p ./community/mydata/
-          archs1=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn media ai networktest tld-proxy proxy tld-cn cn)
+          archs1=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn media games ai networktest tld-proxy proxy tld-cn cn)
           archs2=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai networktest tld-proxy proxy tld-cn cn)
 
           # Generate `mihomo` geosite-all.dat
@@ -133,9 +133,9 @@ jobs:
       - name: Generate `mihomo` rule-set
         run: |
           mkdir -p ./mihomo-ruleset/
-          domains=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn netflix disney max primevideo appletv youtube tiktok bilibili spotify media ai tld-proxy proxy tld-cn cn)
+          domains=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn netflix disney max primevideo appletv youtube tiktok bilibili spotify media games ai tld-proxy proxy tld-cn cn)
           archs=(applications networktest)
-          ips=(privateip cnip netflixip mediaip telegramip)
+          ips=(privateip cnip netflixip mediaip gamesip telegramip)
 
           # Generate `mihomo` rule-set (yaml)
           for domain in "${domains[@]}"; do
@@ -214,7 +214,7 @@ jobs:
 
       - name: Download and unzip `mihomo` core
         run: |
-          wget https://github.com/DustinWin/proxy-tools/releases/download/mihomo/mihomo-alpha-linux-amd64.tar.gz -O - | tar -zxf - -C ./tools/
+          wget https://github.com/DustinWin/proxy-tools/releases/download/mihomo/mihomo-meta-linux-amd64.tar.gz -O - | tar -zxf - -C ./tools/
           mv -f ./tools/CrashCore ./tools/mihomo
 
       - name: Generate `mihomo` rule-set (mrs)
