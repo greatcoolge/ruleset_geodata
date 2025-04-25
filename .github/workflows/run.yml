@@ -48,15 +48,15 @@ jobs:
       - name: Generate `mihomo` geodata
         run: |
           mkdir -p ./community/mydata/
-          archs1=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn media games ai networktest tld-proxy proxy tld-cn cn)
-          archs2=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai networktest tld-proxy proxy tld-cn cn)
+          archs1=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn media games ai networktest tld-proxy proxy cn)
+          archs2=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn ai networktest tld-proxy proxy cn-lite)
 
           # Generate `mihomo` geosite-all.dat
           for arch1 in "${archs1[@]}"; do
-            curl -sSL "${domains_download_url}/${arch1}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,|DOMAIN-KEYWORD' | sed -e 's/^DOMAIN,/full:/' -e 's/^DOMAIN-SUFFIX,//' -e 's/^DOMAIN-KEYWORD,/keyword:/' > "./community/mydata/${arch1}"
+            curl -sSL "${domains_download_url}/${arch1}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,|DOMAIN-KEYWORD' | sed -e 's/DOMAIN,/full:/' -e 's/DOMAIN-SUFFIX,//' -e 's/DOMAIN-KEYWORD,/keyword:/' > "./community/mydata/${arch1}"
           done
-          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/^DOMAIN,/full:/' -e 's/^DOMAIN-SUFFIX,//' -e 's/^DOMAIN-KEYWORD,/keyword:/' -e 's/^DOMAIN-REGEX,/regexp:/' > ./community/mydata/fakeip-filter
-          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | grep -Ev 'DOMAIN-REGEX,|ntp|time|stun' | sed -e 's/^DOMAIN,/full:/' -e 's/^DOMAIN-SUFFIX,//' > ./community/mydata/fakeip-filter-lite
+          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/DOMAIN,/full:/' -e 's/DOMAIN-SUFFIX,//' -e 's/DOMAIN-KEYWORD,/keyword:/' -e 's/DOMAIN-REGEX,/regexp:/' > ./community/mydata/fakeip-filter
+          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | grep -Ev 'DOMAIN-REGEX,|ntp|time|stun' | sed -e 's/DOMAIN,/full:/' -e 's/DOMAIN-SUFFIX,//' > ./community/mydata/fakeip-filter-lite
           cat <<EOF >> ./community/mydata/fakeip-filter-lite
           keyword:ntp
           keyword:time
@@ -72,10 +72,11 @@ jobs:
           # Generate `mihomo` geosite.dat
           rm -f ./mydata/*
           for arch2 in "${archs2[@]}"; do
-            curl -sSL "${domains_download_url}/${arch2}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,|DOMAIN-KEYWORD' | sed -e 's/^DOMAIN,/full:/' -e 's/^DOMAIN-SUFFIX,//' -e 's/^DOMAIN-KEYWORD,/keyword:/' > "./mydata/${arch2}"
+            curl -sSL "${domains_download_url}/${arch2}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,|DOMAIN-KEYWORD' | sed -e 's/DOMAIN,/full:/' -e 's/DOMAIN-SUFFIX,//' -e 's/DOMAIN-KEYWORD,/keyword:/' > "./mydata/${arch2}"
           done
-          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/^DOMAIN,/full:/' -e 's/^DOMAIN-SUFFIX,//' -e 's/^DOMAIN-KEYWORD,/keyword:/' -e 's/^DOMAIN-REGEX,/regexp:/' > ./mydata/fakeip-filter
-          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | grep -Ev 'DOMAIN-REGEX,|ntp|time|stun' | sed -e 's/^DOMAIN,/full:/' -e 's/^DOMAIN-SUFFIX,//' > ./mydata/fakeip-filter-lite
+          mv -f ./mydata/cn-lite ./mydata/cn
+          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/DOMAIN,/full:/' -e 's/DOMAIN-SUFFIX,//' -e 's/DOMAIN-KEYWORD,/keyword:/' -e 's/DOMAIN-REGEX,/regexp:/' > ./mydata/fakeip-filter
+          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | grep -Ev 'DOMAIN-REGEX,|ntp|time|stun' | sed -e 's/DOMAIN,/full:/' -e 's/DOMAIN-SUFFIX,//' > ./mydata/fakeip-filter-lite
           cat <<EOF >> ./mydata/fakeip-filter-lite
           keyword:ntp
           keyword:time
@@ -133,19 +134,19 @@ jobs:
       - name: Generate `mihomo` rule-set
         run: |
           mkdir -p ./mihomo-ruleset/
-          domains=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn netflix disney max primevideo appletv youtube tiktok bilibili spotify media games ai tld-proxy proxy tld-cn cn)
+          domains=(private ads trackerslist microsoft-cn apple-cn google-cn games-cn netflix disney max primevideo appletv youtube tiktok bilibili spotify media games ai tld-proxy proxy cn cn-lite)
           archs=(applications networktest)
           ips=(privateip cnip netflixip mediaip gamesip telegramip)
 
           # Generate `mihomo` rule-set (yaml)
           for domain in "${domains[@]}"; do
             echo 'payload:' > "./mihomo-ruleset/${domain}.yaml"
-            curl -sSL "${domains_download_url}/${domain}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,' | sed -e "s/^DOMAIN,/  - '/" -e "s/^DOMAIN-SUFFIX,/  - '+\./" -e "s/$/'/" >> "./mihomo-ruleset/${domain}.yaml"
+            curl -sSL "${domains_download_url}/${domain}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,' | sed -e "s/DOMAIN,/  - '/" -e "s/DOMAIN-SUFFIX,/  - '+\./" -e "s/$/'/" >> "./mihomo-ruleset/${domain}.yaml"
           done
           echo 'payload:' > "./mihomo-ruleset/fakeip-filter.yaml"
-          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e "s/^DOMAIN,/  - '/" -e "s/^DOMAIN-SUFFIX,/  - '+\./" -e "s/^DOMAIN-REGEX,/  - '/" -e "s/'\./'/" -e "s/$/'/" >> ./mihomo-ruleset/fakeip-filter.yaml
+          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e "s/DOMAIN,/  - '/" -e "s/DOMAIN-SUFFIX,/  - '+\./" -e "s/DOMAIN-REGEX,/  - '/" -e "s/'\./'/" -e "s/$/'/" >> ./mihomo-ruleset/fakeip-filter.yaml
           echo 'payload:' > "./mihomo-ruleset/fakeip-filter-lite.yaml"
-          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | sed -e "s/^DOMAIN,/  - '/" -e "s/^DOMAIN-SUFFIX,/  - '+\./" -e "s/^DOMAIN-REGEX,/  - '/" -e "s/'\./'/" -e "s/$/'/" >> ./mihomo-ruleset/fakeip-filter-lite.yaml
+          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | sed -e "s/DOMAIN,/  - '/" -e "s/DOMAIN-SUFFIX,/  - '+\./" -e "s/DOMAIN-REGEX,/  - '/" -e "s/'\./'/" -e "s/$/'/" >> ./mihomo-ruleset/fakeip-filter-lite.yaml
 
           for arch in "${archs[@]}"; do
             echo 'payload:' > "./mihomo-ruleset/${arch}.yaml"
@@ -154,37 +155,37 @@ jobs:
 
           for ip in "${ips[@]}"; do
             echo 'payload:' > "./mihomo-ruleset/${ip}.yaml"
-            curl -sSL "${ips_download_url}/${ip}.list" | grep 'IP-CIDR' | sed -e "s/^IP-CIDR,/  - '/" -e "s/^IP-CIDR6,/  - '/" -e "s/$/'/" >> "./mihomo-ruleset/${ip}.yaml"
+            curl -sSL "${ips_download_url}/${ip}.list" | grep 'IP-CIDR' | sed -e "s/IP-CIDR,/  - '/" -e "s/IP-CIDR6,/  - '/" -e "s/$/'/" >> "./mihomo-ruleset/${ip}.yaml"
           done
 
           # Generate `mihomo` rule-set (text)
           for domain in "${domains[@]}"; do
-            curl -sSL "${domains_download_url}/${domain}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,' | sed -e 's/^DOMAIN,//' -e 's/^DOMAIN-SUFFIX,/+\./' > "./mihomo-ruleset/${domain}.list"
+            curl -sSL "${domains_download_url}/${domain}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,' | sed -e 's/DOMAIN,//' -e 's/DOMAIN-SUFFIX,/+\./' > "./mihomo-ruleset/${domain}.list"
           done
-          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/^DOMAIN,//' -e 's/^DOMAIN-SUFFIX,/+\./' -e 's/^DOMAIN-REGEX,//' -e 's/^\.//' > ./mihomo-ruleset/fakeip-filter.list
-          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | sed -e 's/^DOMAIN,//' -e 's/^DOMAIN-SUFFIX,/+\./' -e 's/^DOMAIN-REGEX,//' -e 's/^\.//' > ./mihomo-ruleset/fakeip-filter-lite.list
+          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/DOMAIN,//' -e 's/DOMAIN-SUFFIX,/+\./' -e 's/DOMAIN-REGEX,//' -e 's/^\.//' > ./mihomo-ruleset/fakeip-filter.list
+          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | sed -e 's/DOMAIN,//' -e 's/DOMAIN-SUFFIX,/+\./' -e 's/DOMAIN-REGEX,//' -e 's/^\.//' > ./mihomo-ruleset/fakeip-filter-lite.list
 
           for arch in "${archs[@]}"; do
             curl -sSL "${domains_download_url}/${arch}.list"  > "./mihomo-ruleset/${arch}.list"
           done
 
           for ip in "${ips[@]}"; do
-            curl -sSL "${ips_download_url}/${ip}.list" | grep 'IP-CIDR' | sed -e 's/^IP-CIDR,//' -e 's/^IP-CIDR6,//' > "./mihomo-ruleset/${ip}.list"
+            curl -sSL "${ips_download_url}/${ip}.list" | grep 'IP-CIDR' | sed -e 's/IP-CIDR,//' -e 's/IP-CIDR6,//' > "./mihomo-ruleset/${ip}.list"
           done
 
           # Ready for generate `mihomo` rule-set (mrs)
           for domain in "${domains[@]}"; do
             mkdir -p "./tools/domains/${domain}/"
-            curl "${domains_download_url}/${domain}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,' | sed -e 's/^DOMAIN,//' -e 's/^DOMAIN-SUFFIX,/+\./' > "./tools/domains/${domain}/${domain}.list"
+            curl "${domains_download_url}/${domain}.list" | grep -E 'DOMAIN,|DOMAIN-SUFFIX,' | sed -e 's/DOMAIN,//' -e 's/DOMAIN-SUFFIX,/+\./' > "./tools/domains/${domain}/${domain}.list"
           done
           mkdir -p "./tools/domains/fakeip-filter/"
-          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/^DOMAIN,//' -e 's/^DOMAIN-SUFFIX,/+\./' -e 's/^DOMAIN-REGEX,//' -e 's/^\.//' > ./tools/domains/fakeip-filter/fakeip-filter.list
+          curl -sSL "${domains_download_url}/fakeip-filter.list" | sed -e 's/DOMAIN,//' -e 's/DOMAIN-SUFFIX,/+\./' -e 's/DOMAIN-REGEX,//' -e 's/^\.//' > ./tools/domains/fakeip-filter/fakeip-filter.list
           mkdir -p "./tools/domains/fakeip-filter-lite/"
-          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | sed -e 's/^DOMAIN,//' -e 's/^DOMAIN-SUFFIX,/+\./' -e 's/^DOMAIN-REGEX,//' -e 's/^\.//' > ./tools/domains/fakeip-filter-lite/fakeip-filter-lite.list
+          curl -sSL "${domains_download_url}/fakeip-filter-lite.list" | sed -e 's/DOMAIN,//' -e 's/DOMAIN-SUFFIX,/+\./' -e 's/DOMAIN-REGEX,//' -e 's/^\.//' > ./tools/domains/fakeip-filter-lite/fakeip-filter-lite.list
 
           for ip in "${ips[@]}"; do
             mkdir -p "./tools/ips/${ip}/"
-            curl -sSL "${ips_download_url}/${ip}.list"| grep 'IP-CIDR' | sed -e 's/^IP-CIDR,//' -e 's/^IP-CIDR6,//' > "./tools/ips/${ip}/${ip}.list"
+            curl -sSL "${ips_download_url}/${ip}.list"| grep 'IP-CIDR' | sed -e 's/IP-CIDR,//' -e 's/IP-CIDR6,//' > "./tools/ips/${ip}/${ip}.list"
           done
 
           # Ready for generate `sing-box` rule_set
